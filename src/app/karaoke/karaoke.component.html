@@ -1,0 +1,232 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h5 class="box-title">Music Management</h5>
+                        <button title="Add new user" id="modal-219933" pull-right class="btn btn-xs btn-danger adduser" (click)="add()" href="#modal-container-219933" data-toggle="modal">
+                            <i class="fa fa-user"></i>
+                            Add Music</button>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <div class="row">
+                            <div class="col-sm-1"><label>Search:</label></div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="search" class="form-control" title="Enter Music name" placeholder="Keyword" [(ngModel)]="keyword" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered  table-condensed table-hover">
+                                <thead>
+                                    <tr>
+
+                                        <th>
+                                            Songs Name
+                                        </th>
+                                        <th>
+                                            Artist Name
+                                        </th>
+                                        <th>
+                                            Album Image
+                                        </th>
+                                        <th>
+                                            Instrumental File
+                                        </th>
+                                        <th>
+                                            Lyrics File
+                                        </th>
+                                        <th>
+                                            Dance File
+                                        </th>
+                                        <th>
+                                            <small> Created</small>
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of data | search:'songs_name,artist_name':keyword">
+                                        <td>{{item.songs_name}}
+                                            <!--  <span *ngIf="item.isBlocked==false" title="Active Users" class="text-success fa fa-check-circle"> </span>
+                                            <span *ngIf="item.isBlocked==true" title="Blocked Users" class="text-danger fa fa-ban"> </span> --></td>
+                                        <td>{{item.artist_name}}</td>
+                                        <!--  <td>{{item.cat_id}}</td> -->
+                                        <td><a class="btn btn-large btn-success" *ngIf="item.file_url==''" (click)="getCat(item)" href="#modal-container-219933" data-toggle="modal">Add</a>
+                                            <div *ngIf="item.image_url!=''">
+                                                <img src="{{item.image_url}}" width="60">
+                                                <!--  <a class="btn btn-xs btn-success">Edit</a><br> -->
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-large btn-success" *ngIf="item.file_url==''" (click)="getCat(item)" href="#modal-container-219933" data-toggle="modal">Add</a>
+                                            <div *ngIf="item.file_url!=''">
+                                                <a class="btn btn-xs btn-success" href="{{item.file_url}}" target="_blank">Open</a>
+                                                <!-- <a class="btn btn-xs btn-success">Edit</a><a class="btn btn-xs btn-success">Delete</a> -->
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-large btn-success" *ngIf="item.lyrics_url==''" (click)="getCat(item)" href="#modal-container-219933" data-toggle="modal">Add</a>
+                                            <div *ngIf="item.lyrics_url!=''">
+                                                <a class="btn btn-xs btn-success" href="{{item.lyrics_url}}" target="_blank">Open</a>
+                                                <!-- <a class="btn btn-xs btn-success">Edit</a><a class="btn btn-xs btn-success">Delete</a> -->
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-large btn-success" *ngIf="item.dance_url==''" (click)="getCat(item)" href="#modal-container-219933" data-toggle="modal">Add</a>
+                                            <div *ngIf="item.dance_url!=''">
+                                                <a class="btn btn-xs btn-success" href="{{item.dance_url}}" target="_blank">Open</a>
+                                                <!-- <a class="btn btn-xs btn-success">Edit</a><a class="btn btn-xs btn-success">Delete</a> -->
+                                            </div>
+                                        </td>
+                                        <td><small>{{item.createdAt|date}}</small></td>
+                                        <td>
+                                            <button title="Edit" id="modal-219933" class="btn btn-xs btn-success" (click)="getCat(item)" href="#modal-container-219933" data-toggle="modal">Edit</button>
+                                            <button title="Delete user" class="btn btn-xs btn-danger" (click)="delete(item)">Delete</button>
+                                            <!-- <button title="Delete user" id="modal-219934" class="btn btn-xs btn-danger" (click)="deleteMusic(item)" href="#modal-container-219934" data-toggle="modal"><i class="fa fa-trash-o"></i></button> -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <button class="btn btn-xs btn-info" (click)="loadmore()"> <i class="fa fa-repeat"></i>  load more</button>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<div class="modal fade" id="modal-container-219933" data-keyboard="false" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    {{pagetitle}}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+
+                        <!-- <div class="form-group">
+                            <label for="">Type</label>
+                            <select class="form-control" id="" [(ngModel)]="music.cat_type" (change)="onTypeSelect($event.target.value)">
+                                        <option [disabled]="true" value="">Select</option>
+                                        <option value="Sing" ng-selected="Sing" >Sing</option>
+                                        <option value="Dance" ng-selected="Dance">Dance</option>
+                            </select>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="">Category</label>
+                            <select class="form-control" id="" [(ngModel)]="music.pcat_id">
+                                <option [disabled]="true" value="">Select</option>
+
+                                <option *ngFor="let item of category" value="{{item.c_id}}" >{{item.cat_name}}</option>
+                                         
+                            </select>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="">Sub Category</label>
+                            <select class="form-control" id="" [(ngModel)]="music.cat_id">
+                                <option [disabled]="true" value="">Select</option>
+
+                                <option *ngFor="let item of subcat" value="{{item.c_id}}" >{{item.cat_name}}</option>
+                                         
+                            </select>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="">Song Name</label>
+                            <input type="text" class="form-control" id="" [(ngModel)]="music.songs_name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="">Artist Name</label>
+                            <input type="text" class="form-control" id="" [(ngModel)]="music.artist_name" />
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="image">Album Image Upload</label>
+                            <p>{{music.image_url | truncate : -25 : "…"}}</p>
+                            <input type="file" name="albumimage" (change)="onImageFileSelected($event)" placeholder="Upload file" id="image" accept="image/*">
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="karaoke">Instrumental File Upload</label>
+                            <p>{{music.file_url | truncate : -25 : "…"}}</p>
+                            <input type="file" name="karaokefile" (change)="onMusicFileSelected($event)" placeholder="Upload file" id="karaoke">
+                        </div>
+                        <div class="form-group">
+                            <label for="lyrics">Lyrics File Upload</label>
+                            <p>{{music.lyrics_url | truncate : -25 : "…"}}</p>
+                            <input type="file" name="lyricfile" (change)="onlyricFileSelected($event)" placeholder="Upload file" id="lyrics">
+                        </div>
+                        <div class="form-group">
+                            <label for="karaoke">Dance File Upload</label>
+                            <p>{{music.dance_url | truncate : -25 : "…"}}</p>
+                            <input type="file" name="dancefile" (change)="onDanceFileSelected($event)" placeholder="Upload file" id="dance">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Close
+                        </button>
+                <button type="button" (click)="updateData()" class="btn btn-primary">
+                            Save changes
+                        </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="modal fade" id="modal-container-219934" data-keyboard="false" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    ×
+                                </button>
+                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">
+                    {{pagetitle}}
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="deleteData()" class="btn btn-primary">
+                                    Delete
+                                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                    Cancel
+                                </button>
+            </div>
+        </div>
+    </div>
+</div> -->

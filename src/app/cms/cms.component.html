@@ -1,0 +1,162 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h5 class="box-title">Cms Page Management</h5>
+                        <button title="Add new user" id="modal-219933" pull-right class="btn btn-xs btn-success adduser" (click)="adduser()" href="#modal-container-219933" data-toggle="modal">
+                            <i class="fa fa-user"></i>
+                            Add Cms Page</button>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <!-- <div class="row">
+                            <div class="col-sm-2">
+                                <input type="search" class="form-control" title="Enter first name" placeholder="User first name" [(ngModel)]="search.fname" />
+                            </div>
+							<div class="col-sm-2">
+                                <input type="search" class="form-control" title="Enter last name" placeholder="User last name" [(ngModel)]="search.lname" />
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="search" class="form-control" title="Enter user email" placeholder="User Email" [(ngModel)]="search.email" />
+                            </div>
+                            <div class="col-sm-2">
+                                <button title="Search" class="btn btn-info" (click)="ngOnInit()"><i class="fa fa-search"></i> Search</button>
+                                <button title="Clear Search" class="btn btn-dark" (click)="clear()">   <i class="fa fa-remove"></i>  clear</button>
+                            </div>
+                        </div> -->
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered  table-condensed table-hover">
+                                <thead>
+                                    <tr>
+
+                                        <th>
+                                            Topic Name
+                                        </th>
+
+
+
+                                        <th>
+                                            <small> Created</small>
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of data">
+
+                                        <td>{{item.keyword}}</td>
+
+                                        <td><small>{{item.createdAt|date}}</small></td>
+                                        <td> <button title="Edit user" id="modal-219933" class="btn btn-xs btn-success" (click)="getcmspage(item)" href="#modal-container-219933" data-toggle="modal">Edit</button>
+                                            <!-- <button title="Delete user" id="modal-219934" class="btn btn-xs btn-danger" (click)="deletecmspage(item)" href="#modal-container-219934" data-toggle="modal"><i class="fa fa-trash-o"></i></button> -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <button class="btn btn-xs btn-info" (click)="loadmore()"> <i class="fa fa-repeat"></i>  load more</button>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<div class="modal fade" id="modal-container-219933" data-keyboard="false" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    {{pagetitle}}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!--[readonly]="true"-->
+                        <div class="form-group">
+                            <label for="">Page Keywords</label>
+                            <input type="text" class="form-control" id="" [(ngModel)]="cms.keyword" />
+                        </div>
+                        <div class="form-group">
+                            <label for="">
+									Page Description 
+								</label>
+                            <!-- <textarea  [(ngModel)]='cms.content' rows="30" cols="90">                             
+</textarea> -->
+                            <!-- <ckeditor
+									[(ngModel)]='cms.content'
+									[config]="{uiColor: '#99000'}"
+									[readonly]="false"
+									(change)="onChange($event)"
+									(ready)="onReady($event)"
+									(focus)="onFocus($event)"
+									(blur)="onBlur($event)"
+									debounce="500">
+								</ckeditor> -->
+                            <ckeditor [(ngModel)]='cms.content' [config]="{uiColor: '#a4a3f7'}" [readonly]="false" debounce="500">
+                            </ckeditor>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Close
+                        </button>
+                <button type="button" (click)="updateCmsData()" class="btn btn-primary">
+                            Save changes
+                        </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-container-219934" data-keyboard="false" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        ×
+                                    </button>
+                <h4 class="modal-title" id="myModalLabel" style="text-align: center;">
+                    {{pagetitle}}
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="deleteData()" class="btn btn-primary">
+                                        Delete
+                                    </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                        Cancel
+                                    </button>
+            </div>
+        </div>
+    </div>
+</div>

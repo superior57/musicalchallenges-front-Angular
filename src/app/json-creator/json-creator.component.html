@@ -1,0 +1,48 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header"> </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h5 class="box-title">Create Lyrics Json File</h5>
+                        <div style="text-align:right; width: 100%"> <button (click)="saveContent()" class="btn btn-xs btn-success">Download Json</button> </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="list">
+                            <div class="list-header">
+                                <p style="width: 40px">No</p>
+                                <p style="flex: 2">Lyrics Text</p>
+                                <p style="flex: 1">Start</p>
+                                <p style="flex: 1">End</p>
+                                <p style="flex: 1">Action</p>
+                            </div>
+                            <div class="item" *ngFor="let row of arrRows, let idx = index">
+                                <p style="width: 40px">{{idx + 1}}</p> <input type="text" style="flex: 2" (input)="valueChange(idx, 0, $event.target.value)" /> <input type="text" style="flex: 1" (input)="valueChange(idx, 1, $event.target.value)" /> <input type="text" style="flex: 1"
+                                    (input)="valueChange(idx, 2, $event.target.value)" />
+                                <div style="flex: 1; margin-left: 10px"> <button class="btn btn-xs btn-danger" (click)="deleteRow(idx)">Delete row</button> </div>
+                            </div>
+                            <div class="list-footer">
+                                <div style="width: 40px"></div>
+                                <div style="flex: 2"></div>
+                                <div style="flex: 1"></div>
+                                <div style="flex: 1"></div>
+                                <div style="flex: 1; margin-left: 70px"> <button (click)="addRow()" class="btn btn-xs btn-primary">Add row</button> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
